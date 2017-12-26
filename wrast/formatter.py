@@ -45,6 +45,16 @@ class Formatter:
     def _generic_format_node_one(self, node: ast.AST) -> str:
         return self.format(node)
 
+    def format_Num(self, node: ast.Num) -> str:
+        return f'{node.n}'
+
+    def format_Str(self, node: ast.Str) -> str:
+        s = node.s
+        if '\n' in s:
+            return f"'''{s}'''"
+        else:
+            return f"'{s}'"
+
     def format_Module(self, node: ast.Module) -> str:
         self._level = 0
         return self.generic_format(node)
@@ -64,18 +74,8 @@ class Formatter:
             arg_list.append(self.format(keyword))
         return f'{self.format(node.func)}({", ".join(arg_list)})'
 
-    def format_Num(self, node: ast.Num) -> str:
-        return f'{node.n}'
-
     def format_Expr(self, node: ast.Expr) -> str:
         return self._format_block(block=f'{self.format(node.value)}')
-
-    def format_Str(self, node: ast.Str) -> str:
-        s = node.s
-        if '\n' in s:
-            return f"'''{s}'''"
-        else:
-            return f"'{s}'"
 
     def format_Assign(self, node: ast.Assign) -> str:
         targets = ' = '.join(self.format(target) for target in node.targets)
