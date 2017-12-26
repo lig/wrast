@@ -14,6 +14,7 @@ name = "pypi"
 rope = "*"
 "autopep8" = "*"
 jedi = "*"
+pytest = "*"
 
 
 [requires]

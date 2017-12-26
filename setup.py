@@ -24,6 +24,9 @@ setup(
     packages=find_packages(),
     setup_requires=['setuptools_scm'],
     install_requires=[],
+    extras_require={
+        'test': ['tox'],
+    },
     entry_points={
         'console_scripts': [
             'wrast=wrast.cli:main',
