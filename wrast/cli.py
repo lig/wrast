@@ -1,34 +1,13 @@
-import difflib
+import pathlib
 
-from wrast import wrasts
+import click
 
-
-src: str = r"""
-for i  in range(10):
-  print('Hello World!')
-  j = 0
-  while j<3:
-    j += 1
-
-    print('...')
+from wrast import wrastf
+import logging
 
 
-
-
-print('''
-----
-''')
-"""
-
-
-def main() -> None:
-
-    dst: str = wrasts(src)
-
-    print('----')
-    print(
-        ''.join(
-            difflib.ndiff(
-                src.splitlines(keepends=True), dst.splitlines(keepends=True))))
-    print('----')
-    print(dst)
+@click.command()
+@click.argument('filename', type=click.Path(exists=True))
+def main(filename) -> None:
+    logging.basicConfig(level=logging.DEBUG)
+    print(wrastf(pathlib.Path(filename)))

@@ -23,7 +23,7 @@ setup(
     keywords='code formatter python ast pep8',
     packages=find_packages(),
     setup_requires=['setuptools_scm'],
-    install_requires=[],
+    install_requires=['click'],
     extras_require={
         'test': ['tox'],
     },
